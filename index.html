@@ -21,14 +21,22 @@
         </div>
       </div>
     </div>
-
-    <form id="weather" class="form-search">
-        <input type="text" id="zip" placeholder="Enter a zip code…" class="input-medium search-query">
-        <button id="search" type="submit" class="btn">Search</button>
-        <div class="alert alert-error"></div>
-    </form>
-        
-    <table id="output" class="table table-striped">
+    <div id="weather">
+    </div>
+    <script type="text/template" id="search-template">
+            <input type="text" id="zip" placeholder="Enter a zip code…" required title="Please enter a Zip code." class="input-medium search-query">
+            <button id="search" type="submit" class="btn">Search</button>
+            <div class="alert alert-error"></div>
+    </script>
+    <script type="text/template" id="forcast-template">
+        <td><img src="<%= url %>" /></td>
+        <td><%= city %></td>
+        <td><%= state %></td>
+        <td><%= zip %></td>
+        <td><%= temperature %>°F</td>
+        <td><a href="#"><i class="delete icon-trash"></i></a></td>
+    </script>
+    <script type="text/template" id="forecasts-template">
         <caption>Forecast Results</caption>
         <thead>
             <tr>
@@ -42,15 +50,6 @@
         </thead>
         <tbody>
         </tbody>
-    </table>
-
-    <script type="text/template" id="forcast-template">
-        <td><img src="<%= url %>" /></td>
-        <td><%= city %></td>
-        <td><%= state %></td>
-        <td><%= zip %></td>
-        <td><%= temperature %>°F</td>
-        <td><a href="#"><i class="delete icon-trash"></i></a></td>
     </script>
     <script type="text/javascript" data-main="js/main" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.1/require.min.js"></script>
 </body>

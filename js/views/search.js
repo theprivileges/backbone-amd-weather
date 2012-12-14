@@ -1,44 +1,39 @@
 define([
     'jquery',
     'underscore',
-    'backbone',
-    'collections/forecasts',
-    'views/forecast'
-], function ($, _, Backbone, Forecasts, ForecastView) {
+    'backbone'
+], function ($, _, Backbone) {
     'use strict';
-    var ViewSearch = Backbone.View.extend({
+    var searchView = Backbone.View.extend({
+
+        tagName: 'form',
+
+        className: 'form-search',
+
+        id: 'search',
         
-        el: $('#weather'),
+        template: _.template($('#search-template').html()),
 
         events: {
-           'click #search': 'addZip' 
+           'submit': 'addZip', 
         },
-
-        initialize: function () {
-            this.input = $("#zip");
-            this.collection = new Forecasts();
-            this.collection.bind('add', this.addOne, this);
-            return this;
-        },
-        addOne: function (forecast) {
-            var forecast = new ForecastView({model: forecast, collection: this.collection});
+        render: function () {
+            this.$el.html(this.template(this));
             return this;
         },
         addZip: function (e) {
             e.preventDefault();
-            this.collection.create(this.newAttributes());
+            this.collection.create({
+                zip: this.$('#zip').val()
+            });
             this.clear();
-            return false;
-        },
-        newAttributes: function () {
-            return {
-                zip: this.input.val()
-            };
+            return this;
         },
         clear: function () {
-            this.input.val('');
+            this.$('#zip').val('');
             return this;
         }
+
     });
-    return ViewSearch;
+    return searchView;
 })

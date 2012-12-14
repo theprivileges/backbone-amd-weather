@@ -23,7 +23,7 @@ require.config({
     }
 });
 
-define(['views/search', 'bootstrap'], function (ViewSearch) {
+define(['views/weather', 'bootstrap'], function (WeatherView) {
     'use strict';
-    var viewSearch = new ViewSearch();
+    var weatherView = new WeatherView;
 });
